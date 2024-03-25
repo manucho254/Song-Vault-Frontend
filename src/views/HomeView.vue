@@ -1,5 +1,8 @@
+<script setup>
+</script>
+
 <template>
   <main>
-    website coming soon
+    cool
   </main>
 </template>
