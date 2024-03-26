@@ -12,7 +12,7 @@ export default {
         country: '',
         gender: '',
         password: '',
-        confirm_password: '',
+        confirm_password: ''
       },
       genders: ['Male', 'Female', 'Prefer Not To Say'],
       selected: '',
@@ -20,8 +20,24 @@ export default {
     }
   },
   methods: {
-    getCountry() {
-      console.log(this.form_data.country)
+    signUpArtist() {
+      for (let [key, val] of Object.entries(this.form_data)) {
+        if (val == '') {
+          this.notification('error', `${key} missing!`)
+        }
+      }
+      this.$store
+        .dispatch('auth/signUpArtist', this.form_data)
+        .then((res) => {
+          this.notification('success', res.data.message)
+          this.$router.push('/login')
+        })
+        .catch((err) => {
+          this.notification('error', err.response.data.error)
+        })
+    },
+    notification(type, message) {
+      this.$toast.open({ message, type, duration: 3000, position: 'top-right' })
     }
   }
 }
@@ -34,40 +50,22 @@ export default {
           <h3 class="fw-bolder">Welcome!</h3>
           <p class="fw-lighter text-grey">Create an account and share your music.</p>
         </div>
-        <div class="d-flex flex-column gap-2">
+        <form class="d-flex flex-column gap-2" @submit.prevent="signUpArtist">
           <div class="d-flex flex-column">
             <label>Artist/Group Name</label>
-            <input
-              required
-              class="form-control"
-              type="text"
-              name="username"
-              v-model="form_data.username"
-            />
+            <input required class="form-control" type="text" v-model="form_data.username" />
           </div>
           <div class="d-flex flex-column">
             <label>Email</label>
-            <input
-              required
-              class="form-control"
-              type="email"
-              name="email"
-              v-model="form_data.email"
-            />
+            <input required class="form-control" type="email" v-model="form_data.email" />
           </div>
           <div class="d-flex flex-column">
             <label>Phone Number</label>
-            <input
-              required
-              class="form-control"
-              type="text"
-              name="username"
-              v-model="form_data.phone_number"
-            />
+            <input required class="form-control" type="text" v-model="form_data.phone_number" />
           </div>
           <div class="d-flex flex-column">
             <label>Country</label>
-            <select  required class="form-select" v-model="form_data.country" @change="getCountry">
+            <select required class="form-select" v-model="form_data.country" @change="getCountry">
               <option v-for="item in countries" :value="item.name" :key="item.code">
                 {{ item.name }}
               </option>
@@ -76,7 +74,7 @@ export default {
           <div class="d-flex flex-column">
             <label>Gender</label>
             <select required class="form-select" v-model="form_data.gender" @change="getGender">
-              <option  v-for="item in genders" :value="item" :key="item">
+              <option v-for="item in genders" :value="item" :key="item">
                 {{ item }}
               </option>
             </select>
@@ -87,7 +85,6 @@ export default {
               required
               class="form-control"
               type="password"
-              name="password"
               placeholder="password(6-16 characters)"
               v-model="form_data.password"
             />
@@ -98,7 +95,6 @@ export default {
               required
               class="form-control"
               type="password"
-              name="Confirm-password"
               v-model="form_data.confirm_password"
             />
           </div>
@@ -106,14 +102,12 @@ export default {
             <button class="btn bg-dark text-light fw-bold">Sign up</button>
             <!--<button class="btn bg-dark text-light fw-bold">Sign up with Google</button> -->
             <span class="text-center">
-              Got an account<router-link
-                class="text-decoration-underline text-primary"
-                to="/login"
+              Got an account<router-link class="text-decoration-underline text-primary" to="/login"
                 >log in.</router-link
               >
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="auth-image">

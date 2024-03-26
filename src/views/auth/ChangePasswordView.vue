@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     getToken() {
-      /** redirect user to login page if no token in  */
+      /** redirect user to login page if no token in query params */
       if (!this.$route.query.token) {
         this.$router.push('/login')
       } else {
@@ -32,14 +32,13 @@ export default {
           <h3 class="fw-bolder">Change Password</h3>
           <p class="fw-lighter text-grey">Fill the form below to change your password.</p>
         </div>
-        <div class="d-flex flex-column gap-2">
+        <form class="d-flex flex-column gap-2">
           <div class="d-flex flex-column">
             <label>Password</label>
             <input
               required
               class="form-control"
               type="password"
-              name="password"
               v-model="password"
             />
           </div>
@@ -48,7 +47,6 @@ export default {
             <input
               required
               class="form-control"
-              type="password"
               name="confirm_password"
               v-model="confirm_password"
             />
@@ -61,7 +59,7 @@ export default {
               >
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="auth-image">

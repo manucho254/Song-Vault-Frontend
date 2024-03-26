@@ -1,18 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { httpAuth } from '@/services/api.service'
+import httpAuth from '../../../../services/api.service'
 import types from '../types/index'
 
-const baseURL = "http://127.0.0.1:8000/api/accounts";
+const baseURL = process.env.BASE_URL;
 
 export default {
+    fetchUser ({commit}) {
+        return new Promise((resolve, reject) => {
+            commit("setUser")
+            resolve();
+            console.log(reject);
+        })
+    },
     authenticateUser({commit}, payload) {
         return new Promise((resolve, reject) => {
-            httpAuth.post(baseURL + '/login/', payload).then(res => {
+            httpAuth.post(baseURL + '/login', payload).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data)
-                    commit(types.UPDATE_AUTH_TOKENS, res.data.tokens);
-                    commit(types.UPDATE_USER, JSON.stringify(res.data.user));
+                    commit(types.UPDATE_USER_TOKEN, res.data);
                     resolve(res);
                 }
             })
@@ -23,7 +28,7 @@ export default {
     },
     signUpUser({commit}, payload) {
         return new Promise((resolve, reject) =>  {
-            httpAuth.post(baseURL + '/register-user/', payload).then(res => {
+            httpAuth.post(baseURL + '/register', payload).then(res => {
                 if (res.status === 201) {
                     resolve(res);
                 }
@@ -35,7 +40,7 @@ export default {
     },
     signUpArtist({commit}, payload) {
         return new Promise((resolve, reject) =>  {
-            httpAuth.post(baseURL + '/register-artist/', payload).then(res => {
+            httpAuth.post(baseURL + '/artists', payload).then(res => {
                 if (res.status === 201) {
                     resolve(res);
                 }

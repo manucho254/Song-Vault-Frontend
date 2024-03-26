@@ -17,19 +17,20 @@ export default {
           <h3 class="fw-bolder">Reset Password</h3>
           <p class="fw-lighter text-grey">Fill the form below to reset your password.</p>
         </div>
-        <div class="d-flex flex-column gap-2">
+        <form class="d-flex flex-column gap-2">
           <div class="d-flex flex-column">
             <label>Email</label>
-            <input required class="form-control" type="email" name="email" v-model="email" />
+            <input required class="form-control" type="email" v-model="email" />
           </div>
           <div class="d-flex flex-column gap-3">
             <button class="btn bg-dark text-light fw-bold">Reset Password</button>
-            <span class="text-center"><router-link class="text-decoration-underline text-primary" to="/login"
+            <span class="text-center"
+              ><router-link class="text-decoration-underline text-primary" to="/login"
                 >Back to login</router-link
               >
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="auth-image">

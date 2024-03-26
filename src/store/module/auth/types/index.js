@@ -1,0 +1,4 @@
+export default {
+    UPDATE_AUTH_TOKENS: 'UPDATE_AUTH_TOKENS',
+    UPDATE_USER: 'UPDATE_USER'
+}

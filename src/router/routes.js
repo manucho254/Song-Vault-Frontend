@@ -1,5 +1,3 @@
-
-
 export default [
   { path: '/', name:"dashboard", component: () => import('../views/DashboardView.vue')},
   { path: '/login', name:"login", component: () => import('../views/auth/LoginView.vue')},
@@ -9,6 +7,4 @@ export default [
   { path: '/reset-password', name:"resetPassword", component: () => import('../views/auth/ResetPassword.vue')},
   { path: '/confirm-email', name:"confirmEmail", component: () => import('../views/auth/ConfirmEmailView.vue')},
   { path: '/choose-account-type', name:"accountType", component: () => import('../views/auth/ChooseAccountTypeView.vue')},
-
-
 ]

@@ -3,9 +3,34 @@ export default {
   name: 'LoginUser',
   data() {
     return {
-      email: '',
-      password: '',
-      remember_me: ''
+      form_data: {
+        email: '',
+        password: ''
+      },
+      remember_me: false
+    }
+  },
+  methods: {
+    loginUser() {
+      for (let [key, val] of Object.entries(this.form_data)) {
+        if (val == '') {
+          this.notification('error', `${key} missing!`)
+        }
+      }
+      this.$store
+        .dispatch('auth/authenticateUser', this.form_data)
+        .then((res) => {
+          console.log(res.data)
+          this.notification('success', 'User loggedIn successfully.')
+          this.$router.push({ name: 'dashboard' })
+        })
+        .catch((err) => {
+          console.log(err)
+          if (err.response) this.notification('error', err.response.data.error)
+        })
+    },
+    notification(type, message) {
+      this.$toast.open({ message, type, duration: 3000, position: 'top-right' })
     }
   }
 }
@@ -19,10 +44,10 @@ export default {
           <h3 class="fw-bolder">Welcome Back</h3>
           <p class="fw-lighter text-grey">Welcome back! Please enter your details</p>
         </div>
-        <div class="d-flex flex-column gap-2">
+        <form class="d-flex flex-column gap-2" @submit.prevent="loginUser">
           <div class="d-flex flex-column">
             <label>Email</label>
-            <input required class="form-control" type="email" name="email" v-model="email" />
+            <input required class="form-control" type="email" v-model="form_data.email" />
           </div>
           <div class="d-flex flex-column">
             <label>Password</label>
@@ -30,9 +55,8 @@ export default {
               required
               class="form-control"
               type="password"
-              name="password"
               placeholder="password(6-16 characters)"
-              v-model="password"
+              v-model="form_data.password"
             />
           </div>
           <div class="d-flex justify-content-between">
@@ -45,7 +69,7 @@ export default {
             >
           </div>
           <div class="d-flex flex-column gap-3">
-            <button class="btn bg-dark text-light fw-bold">Log in</button>
+            <button class="btn bg-dark text-light fw-bold" type="submit">Log in</button>
             <button class="btn bg-dark text-light fw-bold">Log in with Google</button>
             <span class="text-center">
               Don't have an account<router-link
@@ -55,7 +79,7 @@ export default {
               >
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="auth-image">

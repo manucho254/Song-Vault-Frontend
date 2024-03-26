@@ -2,7 +2,7 @@ const accessToken = "__SongVaultAccess__";
 const refreshToken = "__SongVaultRefresh__";
 
 export const saveTokens = (data) => {
-  window.localStorage.setItem(accessToken, data.access);
+  window.localStorage.setItem(accessToken, data.access_token);
   window.localStorage.setItem(refreshToken, data.refresh);
 };
 

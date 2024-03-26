@@ -1,9 +1,9 @@
 export default {
-    GET_USER(state) {
+    getUser(state) {
         return state.user
     },
 
-    GET_TOKENS(state) {
+    getTokens(state) {
         return state.authTokens
     }
 }

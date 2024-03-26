@@ -2,10 +2,8 @@ import axios from "axios";
 import router from "@/router";
 import { getAccessToken } from "./jwt.service";
 
-
 export const httpAuth = axios.create({
     // eslint-disable-next-line no-undef
-    baseURL: process.env.baseURL,
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
@@ -15,7 +13,6 @@ export const httpAuth = axios.create({
 
 export const httpApi = axios.create({
     // eslint-disable-next-line no-undef
-    baseURL: process.env.baseURL,
     headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',

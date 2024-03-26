@@ -1,8 +1,14 @@
+import { saveTokens } from "@/services/jwt.service"
+
+
 export default {
-    updateUser(state, payload){
-        state.user = payload;
+    UPDATE_USER(state, payload){
+        state.user = payload
+        localStorage.setItem("user", payload);
     },
-    updateAuthTokens(state, payload) {
+
+    UPDATE_AUTH_TOKENS(state, payload) {
         state.authTokens = payload
+        saveTokens(payload)
     }
 }
