@@ -32,15 +32,17 @@ a {
 }
 
 .main-section {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 30px;
   padding-top: 25px;
+  position: relative;
 }
 
 .search-bar {
-  width: 700px;
+  width: 100%;
   padding: 6px;
   padding-left: 20px;
   padding-right: 20px;
@@ -50,8 +52,8 @@ a {
   color: white;
   cursor: pointer;
 }
-.player-card {
-  width: 700px;
+.main-section .player-card {
+  width: 100%;
   height: 70px !important;
   position: fixed;
   bottom: 10px;
@@ -65,7 +67,7 @@ a {
   justify-content: space-between;
 }
 
-.player-card .song-info {
+.main-section .player-card .song-info {
   display: flex;
   gap: 10px;
 }
@@ -101,9 +103,71 @@ a {
   color: white;
 }
 
+.notifications {
+  cursor: pointer;
+}
+
+.profile {
+  cursor: pointer;
+}
+
+.auth {
+  width: 100vw !important;
+}
+.auth .auth-form {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 50%;
+}
+
+.auth .auth-image {
+  height: 100vh;
+  width: 50%;
+}
+
+.auth .auth-form .account-type {
+  width: 200px;
+  height: 250px !important;
+  background-color: rgb(43, 43, 53) !important;
+  color: whitesmoke !important;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+input:focus {
+  outline: none;
+}
 @media (hover: hover) {
-  a:hover {
+  .sidebar a:hover {
     background-color: rgb(85, 85, 237);
     border-radius: 20px;
+  }
+
+  .account-type:hover {
+    border: 2px solid blue;
+  }
+}
+
+.account-type:hover {
+  border: 3px solid rgb(147, 147, 187);
+}
+
+.is_active {
+  border: 3px solid rgb(54, 54, 215) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .auth {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .auth-form {
+    width: 100% !important;
+  }
+  .auth-image {
+    display: none;
   }
 }

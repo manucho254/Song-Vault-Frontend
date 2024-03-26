@@ -12,7 +12,8 @@ export default {
       paused: false,
       volume: 20,
       progress: 0,
-      duration: 0
+      duration: 0,
+      currentTrackNumber: 0
     }
   },
   methods: {
@@ -20,6 +21,7 @@ export default {
       /**
        * play a song
        */
+      if (!filePath) return
       const func = this.songProgress
       if (!this.currentSong) {
         let audio = new Audio(filePath)
@@ -79,11 +81,49 @@ export default {
         el.value = seconds
       }
     },
-    // playSongs() {
-    //   for (let songPath of this.songs) {
-    //     this.playSong(songPath)
-    //   }
-    // }
+    playPrevSong() {
+      /**
+       * Play previous song
+       */
+      const func = this.songProgress
+
+      if (this.currentTrackNumber > 0) {
+        this.currentTrackNumber -= 1
+      } else this.currentTrackNumber = 0
+
+      if (this.currentSong) this.currentSong.pause()
+      let audio = new Audio(this.songs[this.currentTrackNumber])
+      audio.type = 'audio/mpeg'
+      this.currentSong = audio
+      this.playing = true
+      this.currentSong.load()
+      // get song duration
+      audio.onloadedmetadata = async function () {
+        func(audio.duration, audio)
+      }
+      this.currentSong.play()
+    },
+    playNextSong() {
+      /**
+       * Play next song
+       */
+      const func = this.songProgress
+      if (this.currentTrackNumber >= this.songs.length - 1) {
+        this.currentTrackNumber = 0
+      } else this.currentTrackNumber += 1
+
+      if (this.currentSong) this.currentSong.pause()
+      let audio = new Audio(this.songs[this.currentTrackNumber])
+      audio.type = 'audio/mpeg'
+      this.currentSong = audio
+      this.playing = true
+      this.currentSong.load()
+      // get song duration
+      audio.onloadedmetadata = async function () {
+        func(audio.duration, audio)
+      }
+      this.currentSong.play()
+    }
   }
 }
 </script>
@@ -100,18 +140,18 @@ export default {
     <div class="d-flex flex-column justify-center align-items-center w-50">
       <div class="d-flex">
         <button class="song-shuffle btn text-light"><i class="fa-solid fa-shuffle"></i></button>
-        <button class="song-prev btn text-light"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="song-prev btn text-light" v-on:click="playPrevSong">
+          <i class="fa-solid fa-backward-step"></i>
+        </button>
         <button class="song-pause btn text-light" v-on:click="pauseSong" v-if="playing">
           <i class="fa-regular fa-circle-pause"></i>
         </button>
-        <button
-          class="song-play btn text-light"
-          v-on:click="playSong('../../../Dermot Kennedy Power Over Me Audio.mp3')"
-          v-else
-        >
+        <button class="song-play btn text-light" v-on:click="playSong(songs[0])" v-else>
           <i class="fa-regular fa-circle-play"></i>
         </button>
-        <button class="song-next btn text-light"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="song-next btn text-light" v-on:click="playNextSong">
+          <i class="fa-solid fa-forward-step"></i>
+        </button>
         <button class="song-repeat btn text-light" v-on:click="repeatSong">
           <i class="fa-solid fa-repeat"></i>
         </button>
