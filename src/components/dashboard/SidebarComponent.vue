@@ -5,32 +5,56 @@
     </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">MENU</span>
-      <div class="d-flex flex-column gap-2 px-3">
-        <router-link to="/dashboard">Home</router-link>
-        <router-link to="/dashboard">Explore</router-link>
+      <div class="d-flex flex-column gap-2">
+        <router-link to="/dashboard"
+          ><span class="d-flex gap-2"><i class="bi bi-house"></i>Home</span></router-link
+        >
+        <router-link to="/dashboard"
+          ><span class="d-flex gap-2"
+            ><i class="bi bi-arrow-right-circle"></i>Explore</span
+          ></router-link
+        >
       </div>
     </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">SAVED PLAYLISTS</span>
-      <div class="d-flex flex-column gap-2 px-3">
+      <div class="d-flex flex-column gap-2">
         <router-link to="/dashboard/playlist/id">Happy</router-link>
       </div>
     </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">YOUR LIBRARY</span>
-      <div class="d-flex flex-column gap-2 px-3">
-        <router-link to="/dashboard/playlist/id">Recent</router-link>
-        <router-link to="/dashboard/playlist/id">Favorites</router-link>
-        <router-link to="/dashboard/playlist/id">Playlist</router-link>
-        <router-link to="/dashboard/playlist/id">Following</router-link>
+      <div class="d-flex flex-column gap-2">
+        <router-link to="/dashboard/"
+          ><span class="d-flex gap-2"><i class="bi bi-clock-fill"></i>Recent</span></router-link
+        >
+        <router-link to="/dashboard/"
+          ><span class="d-flex gap-2"
+            ><i class="fa-solid fa-heart-circle-plus"></i>Favorites</span
+          ></router-link
+        >
+        <router-link to="/dashboard/"
+          ><span class="d-flex gap-2">
+            <img src="../../assets/images/folder-icon.png" width="20" height="20" />Playlists</span
+          ></router-link
+        >
+        <router-link to="/dashboard/"
+          ><span class="d-flex gap-2"><i class="fa-solid fa-users"></i>Following</span></router-link
+        >
       </div>
     </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">GENERAL</span>
-      <div class="d-flex flex-column gap-2 px-3">
-        <router-link to="/dashboard/playlist/id">Settings</router-link>
-        <router-link to="/dashboard/playlist/id">Account</router-link>
-        <router-link to="/dashboard/playlist/id">Logout</router-link>
+      <div class="d-flex flex-column gap-2">
+        <router-link to="/dashboard/playlist/id"
+          ><span class="d-flex gap-2"><i class="bi bi-gear"></i>Settings</span></router-link
+        >
+        <router-link to="/dashboard/playlist/id"
+          ><span class="d-flex gap-2"><i class="bi bi-person"></i>Account</span></router-link
+        >
+        <router-link to="/dashboard/playlist/id"
+          ><span class="d-flex gap-2"><i class="bi bi-box-arrow-left"></i>Logout</span></router-link
+        >
       </div>
     </div>
   </div>

@@ -52,7 +52,7 @@ a {
 }
 .player-card {
   width: 700px;
-  height: 60px !important;
+  height: 70px !important;
   position: fixed;
   bottom: 10px;
   background-color: rgb(43, 43, 53);
@@ -60,6 +60,27 @@ a {
   padding: 10px;
   border: none;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-card .song-info {
+  display: flex;
+  gap: 10px;
+}
+
+.bg-default {
+  background-color: rgb(43, 43, 53) !important;
+}
+
+.song-title {
+  font-size: 18px;
+}
+
+.song-artist {
+  font-size: 15px;
+  color: grey;
 }
 
 .music-card {
