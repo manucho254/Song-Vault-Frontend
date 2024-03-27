@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
+
 import { httpAuth } from '@/services/api.service'
+import { destroyTokens } from '@/services/jwt.service'
 import types from '../types/index'
 
 const baseURL = "http://127.0.0.1:8000/api/accounts";
@@ -10,7 +11,6 @@ export default {
         return new Promise((resolve, reject) => {
             httpAuth.post(baseURL + '/login/', payload).then(res => {
                 if (res.status === 200) {
-                    console.log(res.data)
                     commit(types.UPDATE_AUTH_TOKENS, res.data.tokens);
                     commit(types.UPDATE_USER, JSON.stringify(res.data.user));
                     resolve(res);
@@ -69,6 +69,9 @@ export default {
             });
         })
     },
-
-
+    logout({commit}) {
+        commit(types.UPDATE_AUTH_TOKENS, { access_token: "", refresh: "" });
+        commit(types.UPDATE_USER, JSON.stringify({}));
+        destroyTokens()
+    },
 }

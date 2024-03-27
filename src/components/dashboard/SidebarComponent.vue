@@ -1,3 +1,18 @@
+<script>
+export default {
+  name: 'SidebarComponent',
+  data() {
+    return {}
+  },
+  methods: {
+    logoutUser() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push({name: "login"});
+    }
+  }
+}
+</script>
+
 <template>
   <div class="sidebar">
     <div class="sidebar-header">
@@ -52,9 +67,8 @@
         <router-link to="/dashboard/playlist/id"
           ><span class="d-flex gap-2"><i class="bi bi-person"></i>Account</span></router-link
         >
-        <router-link to="/dashboard/playlist/id"
-          ><span class="d-flex gap-2"><i class="bi bi-box-arrow-left"></i>Logout</span></router-link
-        >
+        
+        <a v-on:click="logoutUser"><span class="d-flex gap-2 text-light" ><i class="bi bi-box-arrow-left"></i>Logout</span></a>
       </div>
     </div>
   </div>

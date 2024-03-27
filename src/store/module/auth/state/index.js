@@ -1,7 +1,7 @@
 export default {
     user: {},
     authTokens: {
-        access: "",
+        access_token: "",
         refresh: "",
     }
 }

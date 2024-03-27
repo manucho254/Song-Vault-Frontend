@@ -3,7 +3,7 @@ export default {
         return state.user
     },
 
-    GET_TOKENS(state) {
+    GET_AUTH_TOKENS(state) {
         return state.authTokens
     }
 }
