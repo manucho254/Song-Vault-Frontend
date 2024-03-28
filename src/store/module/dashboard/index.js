@@ -4,7 +4,7 @@ import mutations from "./mutations"
 import state from "./state"
 
 
-const auth = {
+const dashboard = {
     namespaced: true,
     actions,
     getters,
@@ -13,4 +13,4 @@ const auth = {
 }
 
 
-export default auth
+export default dashboard

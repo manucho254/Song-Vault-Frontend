@@ -1,13 +1,12 @@
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'PlayerComponent',
   data() {
     return {
-      songs: [
-        '../../../Dermot Kennedy Power Over Me Audio.mp3',
-        '../../../Dermot Kennedy Outnumbered.mp3'
-      ],
-      current_song: '',
+      songs: [],
+      currentSong: '',
+      track: {},
       playing: false,
       paused: false,
       volume: 20,
@@ -36,6 +35,10 @@ export default {
         }
         this.currentSong.play()
         return
+      }
+
+      if (this.currentSong.paused){
+        this.currentSong.pause()
       }
 
       this.playing = true
@@ -91,8 +94,11 @@ export default {
         this.currentTrackNumber -= 1
       } else this.currentTrackNumber = 0
 
+      let track = this.GET_PLAYING_SONGS[this.currentTrackNumber]
+      this.track = { ...track }
+      console.log(this.track)
       if (this.currentSong) this.currentSong.pause()
-      let audio = new Audio(this.songs[this.currentTrackNumber])
+      let audio = new Audio(track.file)
       audio.type = 'audio/mpeg'
       this.currentSong = audio
       this.playing = true
@@ -108,12 +114,15 @@ export default {
        * Play next song
        */
       const func = this.songProgress
-      if (this.currentTrackNumber >= this.songs.length - 1) {
+      if (this.currentTrackNumber >= this.GET_PLAYING_SONGS.length - 1) {
         this.currentTrackNumber = 0
       } else this.currentTrackNumber += 1
 
+      console.log(this.GET_PLAYING_SONGS[this.currentTrackNumber])
+      let track = this.GET_PLAYING_SONGS[this.currentTrackNumber]
+      this.track = { ...track }
       if (this.currentSong) this.currentSong.pause()
-      let audio = new Audio(this.songs[this.currentTrackNumber])
+      let audio = new Audio(track.file)
       audio.type = 'audio/mpeg'
       this.currentSong = audio
       this.playing = true
@@ -124,32 +133,46 @@ export default {
       }
       this.currentSong.play()
     }
+  },
+  mounted() {
+    if (this.GET_PLAYING_SONGS.length > 0) {
+      this.track = this.GET_PLAYING_SONGS[0]
+    }
+  },
+  computed: {
+    ...mapGetters({
+      GET_PLAYING_SONGS: 'dashboard/GET_PLAYING_SONGS'
+    })
   }
 }
 </script>
 
 <template>
-  <div class="player-card">
+  <div class="player-card" v-if="GET_PLAYING_SONGS.length > 0">
     <div class="song-info">
       <img src="" alt="song cover" />
-      <div class="d-flex flex-column">
-        <span class="song-title">Sure thing</span>
-        <span class="song-artist">miguel</span>
+      <div class="d-flex flex-column" v-if="this.track">
+        <span class="song-title">{{ this.track.title }}</span>
+        <span class="song-artist">{{ this.track.artist }}</span>
       </div>
     </div>
     <div class="d-flex flex-column justify-center align-items-center w-50">
       <div class="d-flex">
         <button class="song-shuffle btn text-light"><i class="fa-solid fa-shuffle"></i></button>
-        <button class="song-prev btn text-light" v-on:click="playPrevSong">
+        <button class="song-prev btn text-light" @click="playPrevSong()">
           <i class="fa-solid fa-backward-step"></i>
         </button>
-        <button class="song-pause btn text-light" v-on:click="pauseSong" v-if="playing">
+        <button class="song-pause btn text-light" @click="pauseSong()" v-if="playing">
           <i class="fa-regular fa-circle-pause"></i>
         </button>
-        <button class="song-play btn text-light" v-on:click="playSong(songs[0])" v-else>
+        <button
+          class="song-play btn text-light"
+          @click="playSong(GET_PLAYING_SONGS[0].file)"
+          v-else
+        >
           <i class="fa-regular fa-circle-play"></i>
         </button>
-        <button class="song-next btn text-light" v-on:click="playNextSong">
+        <button class="song-next btn text-light" @click="playNextSong()">
           <i class="fa-solid fa-forward-step"></i>
         </button>
         <button class="song-repeat btn text-light" v-on:click="repeatSong">

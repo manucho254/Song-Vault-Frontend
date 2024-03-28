@@ -10,4 +10,7 @@
 
 body {
   background-color: rgb(25, 24, 28) !important;
+  font-family: 'Courier New', Courier, monospace;
+  color: white !important;
+  overflow: hidden;
 }

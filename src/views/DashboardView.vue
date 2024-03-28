@@ -14,6 +14,11 @@ export default {
       image: ''
     }
   },
+  methods: {
+    getPathName() {
+      return this.$route.path
+    }
+  }
 }
 </script>
 
@@ -37,8 +42,9 @@ export default {
           <img v-else :src="image" alt="profile image" />
         </div>
       </div>
-      <CatalogComponent />
+      <CatalogComponent v-if="getPathName() === '/'"/>
       <PlayerComponent />
+      <router-view />
     </main>
   </div>
 </template>

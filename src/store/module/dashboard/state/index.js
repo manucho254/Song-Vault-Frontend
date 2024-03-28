@@ -1,7 +1,12 @@
 export default {
-    user: {},
-    authTokens: {
-        access: "",
-        refresh: "",
-    }
+    albums: [],
+    album: {},
+    playlists: [],
+    playlist: {},
+    recent: [],
+    songs: [],
+    song: {},
+    artists: [],
+    artist: {},
+    playingSongs: []
 }
