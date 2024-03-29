@@ -58,7 +58,7 @@ export default {
 <template>
   <div class="sidebar">
     <div class="sidebar-header">
-      <h2>Song Vault</h2>
+      <h3>𝕊𝕠𝕟𝕘<span class="text-primary">𝕍𝕒𝕦𝕝𝕥</span></h3>
     </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">MENU</span>
@@ -71,7 +71,7 @@ export default {
         >
         <router-link
           to="/explore"
-          :class="active.value !== '/explore ' ? '' : active.class"
+          :class="active.value !== '/explore' ? '' : active.class"
           @click="toggleActive('/explore')"
           ><span class="d-flex gap-2"
             ><i class="bi bi-arrow-right-circle"></i>Explore</span
@@ -128,7 +128,7 @@ export default {
           ><span class="d-flex gap-2"><i class="bi bi-gear"></i>account</span></router-link
         >
 
-        <a class="logout"
+        <a class="logout" @click="logoutUser"
           ><span class="d-flex gap-2 text-light"
             ><i class="bi bi-box-arrow-left"></i>Logout</span
           ></a

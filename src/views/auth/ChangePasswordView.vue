@@ -27,6 +27,7 @@ export default {
 <template>
   <div class="auth d-flex justify-content-between flex-wrap">
     <div class="bg-light auth-form">
+      <h3 class="auth-header">𝕊𝕠𝕟𝕘<span class="text-primary">𝕍𝕒𝕦𝕝𝕥</span></h3>
       <div class="card bg-light w-75 border-0 p-4">
         <div class="text-start mb-3">
           <h3 class="fw-bolder">Change Password</h3>
@@ -35,12 +36,7 @@ export default {
         <form class="d-flex flex-column gap-2">
           <div class="d-flex flex-column">
             <label>Password</label>
-            <input
-              required
-              class="form-control"
-              type="password"
-              v-model="password"
-            />
+            <input required class="form-control" type="password" v-model="password" />
           </div>
           <div class="d-flex flex-column">
             <label>Confirm Password</label>

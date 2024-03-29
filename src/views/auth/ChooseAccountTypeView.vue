@@ -25,6 +25,7 @@ export default {
 <template>
   <div class="auth d-flex justify-content-between flex-wrap">
     <div class="bg-light auth-form">
+      <h3 class="auth-header">𝕊𝕠𝕟𝕘<span class="text-primary">𝕍𝕒𝕦𝕝𝕥</span></h3>
       <div class="bg-light d-flex flex-column gap-3">
         <div>
           <h3 class="fw-bold text-dark">Choose Account Type</h3>

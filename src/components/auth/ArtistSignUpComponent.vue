@@ -45,8 +45,8 @@ export default {
 <template>
   <div class="auth d-flex justify-content-between flex-wrap">
     <div class="bg-light auth-form">
-      <div class="card bg-light w-75 border-0 p-4">
-        <div class="text-start mb-3">
+      <div class="card bg-light text-dark w-75 border-0 p-4">
+        <div class="text-start mb-1">
           <h3 class="fw-bolder">Welcome!</h3>
           <p class="fw-lighter text-grey">Create an account and share your music.</p>
         </div>

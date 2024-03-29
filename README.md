@@ -1,6 +1,8 @@
 # SongVault
 
-This template should help get you started developing with Vue 3 in Vite.
+- Song vault Frontend Ui
+
+<img width="100%" height="400px" src="./src/assets/images/Song Vault playlist.png">
 
 ## Recommended IDE Setup
 
