@@ -1,4 +1,5 @@
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarComponent',
   data() {
@@ -19,10 +20,30 @@ export default {
     },
     getPath() {
       return this.$route.path
+    },
+    createPlaylist() {
+      this.$store
+        .dispatch('dashboard/createPlaylist')
+        .then((res) => {
+          this.$toast.open({
+            message: 'Playlist Created successfully.',
+            type: 'success',
+            duration: 3000,
+            position: 'top-right'
+          })
+          this.$router.push(`/playlists/${res.data.playlist_id}`)
+          console.log(res)
+        })
+        .catch((err) => console.log(err))
     }
   },
   mounted() {
     this.path = this.getPath()
+  },
+  computed: {
+    ...mapGetters({
+      GET_PLAYLISTS: 'dashboard/GET_PLAYLISTS'
+    })
   }
 }
 </script>
@@ -45,12 +66,17 @@ export default {
         >
       </div>
     </div>
-    <!-- <div class="d-flex flex-column gap-3">
+    <div class="d-flex flex-column gap-3">
       <span class="text-grey">SAVED PLAYLISTS</span>
-      <div class="d-flex flex-column gap-2">
-        <router-link to="/">Happy</router-link>
-      </div>
-    </div> -->
+      <a role="button" @click="createPlaylist"
+        ><i class="fa-solid fa-plus-square"></i> Create playlist</a
+      >
+      <router-link to="/playlists"
+        ><span class="d-flex gap-2">
+          <img src="../../assets/images/folder-icon.png" width="20" height="20" />Playlists</span
+        ></router-link
+      >
+    </div>
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">YOUR LIBRARY</span>
       <div class="d-flex flex-column gap-2">
@@ -60,11 +86,6 @@ export default {
         <router-link to="/favorites"
           ><span class="d-flex gap-2"
             ><i class="fa-solid fa-heart-circle-plus"></i>Favorites</span
-          ></router-link
-        >
-        <router-link to="/playlists"
-          ><span class="d-flex gap-2">
-            <img src="../../assets/images/folder-icon.png" width="20" height="20" />Playlists</span
           ></router-link
         >
         <router-link to="/following"
@@ -79,7 +100,7 @@ export default {
           ><span class="d-flex gap-2"><i class="bi bi-gear"></i>account</span></router-link
         >
 
-        <a v-on:click="logoutUser"
+        <a class="logout" v-on:click="logoutUser"
           ><span class="d-flex gap-2 text-light"
             ><i class="bi bi-box-arrow-left"></i>Logout</span
           ></a

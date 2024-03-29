@@ -23,7 +23,8 @@ export default {
         title: this.song.title,
         artist: this.song.artist.user.username,
         image: this.song.song_media[0].image,
-        file: `${this.baseURL}${this.song.song_media[0].file}`
+        file: `${this.baseURL}${this.song.song_media[0].file}`,
+        autoplay: true,
       }
       this.$store.commit('dashboard/UPDATE_PLAYING_SONGS', [data])
       this.$router.go();

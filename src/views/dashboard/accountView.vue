@@ -20,7 +20,11 @@ export default {
     }
   },
   mounted() {
-    this.form_data = { ...this.GET_USER }
+    try {
+      this.form_data = JSON.parse(this.GET_USER)
+    } catch (err) {
+      this.form_data = { ...this.GET_USER }
+    }
   },
   methods: {
     updateProfile() {
@@ -40,7 +44,7 @@ export default {
     getFile(e) {
       const { files } = e.target
       console.log(e.target)
-      this.form_data["user_media"] = [{"image": files}]
+      this.form_data['user_media'] = [{ image: files }]
       if (files && files[0]) {
         if (this.image.src) {
           URL.revokeObjectURL(this.image.src)

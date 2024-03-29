@@ -193,6 +193,10 @@ a {
   border-radius: 50%;
 }
 
+.logout {
+  cursor: pointer;
+}
+
 input:focus {
   outline: none;
 }

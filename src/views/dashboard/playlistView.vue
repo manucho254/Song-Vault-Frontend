@@ -5,7 +5,7 @@ export default {
   name: 'playlistView',
   data() {
     return {
-      data: '',
+      data: { songs: [] },
       baseURL: 'http://127.0.0.1:8000/'
     }
   },
@@ -21,14 +21,17 @@ export default {
     playSongs() {
       let songs = []
 
-      for (let song of this.data.songs) {
-        let data = {
-          title: song.title,
-          artist: song.artist.user.username,
-          image: song.song_media[0].image,
-          file: `${this.baseURL}${song.song_media[0].file}`
+      if (this.data) {
+        for (let song of this.data.songs) {
+          let data = {
+            title: song.title,
+            artist: song.artist.user.username,
+            image: song.song_media[0].image,
+            file: `${this.baseURL}${song.song_media[0].file}`,
+            autoplay: true,
+          }
+          songs.push(data)
         }
-        songs.push(data)
       }
       this.$store.commit('dashboard/UPDATE_PLAYING_SONGS', songs)
       this.$router.go()
@@ -74,6 +77,9 @@ export default {
             <th scope="col"><i class="fa-solid fa-clock"></i></th>
           </tr>
         </thead>
+        <tbody v-if="data.songs.length == 0">
+          No music in playlist.
+        </tbody>
         <tbody v-for="(song, index) in data.songs" :key="song.song_id">
           <tr>
             <th scope="row">{{ index + 1 }}</th>

@@ -42,4 +42,12 @@ export default {
     GET_SEARCHED(state) {
         return state.searched
     },
+
+    GET_FAVORITES(state) {
+        return state.favorites
+    },
+
+    GET_FOLLOWING(state) {
+        return state.following
+    }
 }

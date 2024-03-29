@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap gap-3">
     <router-link
       :to="`/albums/${album.album_id}`"
       v-for="album in albums"

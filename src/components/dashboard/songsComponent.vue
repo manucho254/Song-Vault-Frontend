@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex gap-3">
+  <div class="d-flex flex-wrap gap-3">
     <router-link
       :to="`/songs/${song.song_id}`"
       v-for="song in songs"

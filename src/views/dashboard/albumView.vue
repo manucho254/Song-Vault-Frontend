@@ -26,7 +26,8 @@ export default {
           title: song.title,
           artist: song.artist.user.username,
           image: song.song_media[0].image,
-          file: `${this.baseURL}${song.song_media[0].file}`
+          file: `${this.baseURL}${song.song_media[0].file}`,
+          autoplay: true,
         }
         songs.push(data)
       }

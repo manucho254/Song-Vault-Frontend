@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template>
-  <div class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap gap-3">
     <router-link
       :to="`/playlists/${playlist.playlist_id}`"
       v-for="playlist in playlists"

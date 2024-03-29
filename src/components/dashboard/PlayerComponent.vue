@@ -12,7 +12,8 @@ export default {
       volume: 20,
       progress: 0,
       duration: 0,
-      currentTrackNumber: 0
+      currentTrackNumber: 0,
+      autoplay: false
     }
   },
   methods: {

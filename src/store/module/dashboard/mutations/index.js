@@ -41,5 +41,13 @@ export default {
 
     UPDATE_SEARCHED(state, payload) {
         state.searched = payload
+    },
+
+    UPDATE_FAVORITES(state, payload) {
+        state.favorites = payload
+    },
+
+    UPDATE_FOLLOWING(state, payload) {
+        state.following = payload
     }
 }

@@ -116,6 +116,34 @@ export default {
             });
         })
     },
+    createPlaylist({commit}) {
+        return new Promise((resolve, reject) => {
+            httpApi.post(baseURL + `/playlists/`).then(res => {
+                if (res.status === 201) {
+                    res.data['songs'] = processSongs(res.data['songs'])
+                    commit(types.UPDATE_PLAYLIST, res.data);
+                    resolve(res);
+                }
+            })
+            .catch(err => {
+                reject(err);
+            });
+        })
+    },
+    updatePlaylist({commit}, payload) {
+        return new Promise((resolve, reject) => {
+            httpApi.put(baseURL + `/playlists/${payload.playlist_id}/`).then(res => {
+                if (res.status === 200) {
+                    res.data['songs'] = processSongs(res.data['songs'])
+                    commit(types.UPDATE_PLAYLIST, res.data);
+                    resolve(res);
+                }
+            })
+            .catch(err => {
+                reject(err);
+            });
+        })
+    },
 
     searchCatalog({commit}, payload) {
         return new Promise((resolve, reject) =>  {
