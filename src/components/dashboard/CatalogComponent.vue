@@ -46,16 +46,16 @@ export default {
 }
 </script>
 <template>
-  <div class="Albums">
+  <div class="albums">
     <h3 class="text-light">Albums</h3>
-    <albumsComponentVue :albums="GET_ALBUMS" />
+    <albumsComponentVue :albums="GET_ALBUMS.results" />
   </div>
-  <div class="Songs">
-    <h3 class="text-light">For You</h3>
-    <songsComponentVue :songs="GET_SONGS" />
+  <div class="songs">
+    <h3 class="text-light">Singles</h3>
+    <songsComponentVue :songs="GET_SONGS.results" />
   </div>
   <div class="artists">
     <h3 class="text-light">Artists</h3>
-    <artistsComponentVue :artists="GET_ARTISTS" />
+    <artistsComponentVue :artists="GET_ARTISTS.results" />
   </div>
 </template>

@@ -20,7 +20,7 @@ function formatDuration(duration) {
 
 function processSongs (songs){
     for (let song of songs) {
-      fetchDuration(`http://127.0.0.1:8000/${song.song_media[0].file}`).then(
+      fetchDuration(`${song.song_media[0].file}`).then(
         (duration) => {
           song['duration'] = formatDuration(Math.floor(duration))
         }

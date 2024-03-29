@@ -43,9 +43,14 @@ a {
   overflow-y: scroll;
 }
 
+.main-section::after {
+  content: '';
+  margin-bottom: 50px !important;
+}
+
 .search-bar {
-  width: 100%;
-  padding: 6px;
+  width: 70%;
+  padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
   border: none;
@@ -53,6 +58,8 @@ a {
   background-color: rgb(43, 43, 53);
   color: white;
   cursor: pointer;
+  position: fixed;
+  top: 30px;
 }
 .main-section .player-card {
   width: 80%;
@@ -69,9 +76,20 @@ a {
   justify-content: space-between;
 }
 
+.player-card::before {
+  content: '';
+  margin-top: 30px;
+}
+
 .main-section .player-card .song-info {
   display: flex;
   gap: 10px;
+}
+
+.song-info img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
 }
 
 .bg-default {
@@ -98,10 +116,10 @@ a {
   padding: 15px;
 }
 
-.music-card .cover_image {
+.music-card .cover-image {
   width: 170px;
   height: 250px;
-  background-color: rgb(43, 43, 53);
+  background-color: rgb(173, 173, 212);
   color: white;
 }
 
@@ -143,14 +161,53 @@ a {
   font-size: 30px;
 }
 
+.single-header {
+  padding: 10px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(20, 20, 121, 1) 0%,
+    rgb(45, 150, 203) 100%
+  );
+  border-radius: 5px;
+}
+
+.single-header img {
+  width: 180px !important;
+  height: 200px !important;
+}
+
+.home-image {
+  margin-top: 15px;
+  width: 100%;
+  height: 200px !important;
+  border-radius: 10px;
+  object-fit: fill;
+}
+
+.account-update img {
+  width: 200px !important;
+  height: 200px !important;
+  background-color: gray;
+  border-radius: 50%;
+}
 
 input:focus {
   outline: none;
 }
+
+.sidebar-activate {
+  background-color: rgb(31, 31, 153) !important;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 @media (hover: hover) {
   .sidebar a:hover {
-    background-color: rgb(85, 85, 237);
-    border-radius: 20px;
+    background-color: rgb(31, 31, 153);
+    border-radius: 10px;
+    padding: 10px;
   }
 
   .account-type:hover {

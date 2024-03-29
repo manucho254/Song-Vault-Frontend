@@ -29,6 +29,6 @@ export default {
 <template>
   <div class="Playlists">
     <h3 class="text-light">PLAYLISTS</h3>
-    <playListComponentVue :playlists="GET_PLAYLISTS" />
+    <playListComponentVue :playlists="GET_PLAYLISTS.results" />
   </div>
 </template>

@@ -1,7 +1,12 @@
 <script>
 export default {
   name: 'AlbumsCardComponent',
-  props: ['artists']
+  props: ['artists'],
+  data() {
+    return {
+      baseURL: 'http://127.0.0.1:8000/'
+    }
+  }
 }
 </script>
 
@@ -9,12 +14,16 @@ export default {
   <div class="d-flex flex-wrap">
     <router-link
       :to="`/artists/${artist.artist_id}`"
-      v-for="artist in artists.results"
+      v-for="artist in artists"
       :key="artist.artist_id"
       class="music-card"
     >
       <div v-if="artist.user.user_media.length > 0">
-        <img class="img-fluid w-100" :src="artist.user.user_media[0].image" alt="cover image" />
+        <img
+          class="img-fluid w-100"
+          :src="artist.user.user_media[0].image"
+          alt="cover image"
+        />
       </div>
       <div v-else>
         <img

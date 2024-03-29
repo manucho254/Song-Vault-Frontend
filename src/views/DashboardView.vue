@@ -26,13 +26,11 @@ export default {
   <div class="d-flex">
     <SidebarComponent />
     <main class="main-section">
-      <div class="d-flex justify-content-between gap-4">
-        <input
-          class="search-bar"
-          placeholder="Search by artist, songs or albums"
-          type="text"
-          name="search"
-          v-model="search"
+      <div class="d-flex justify-content-end gap-4">
+        <img
+          v-if="getPathName() === '/'"
+          class="home-image img-fluid"
+          src="../assets/images/concert-image.jpg"
         />
         <div class="d-flex gap-3">
           <span class="notifications h3 text-white"><i class="fa-regular fa-bell"></i></span>
@@ -42,7 +40,7 @@ export default {
           <img v-else :src="image" alt="profile image" />
         </div>
       </div>
-      <CatalogComponent v-if="getPathName() === '/'"/>
+      <CatalogComponent v-if="getPathName() === '/'" />
       <PlayerComponent />
       <router-view />
     </main>

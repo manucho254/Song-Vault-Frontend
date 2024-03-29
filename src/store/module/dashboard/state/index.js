@@ -8,5 +8,6 @@ export default {
     song: {},
     artists: [],
     artist: {},
-    playingSongs: []
+    playingSongs: [],
+    searched: {songs: [], albums: [], artists: []}
 }

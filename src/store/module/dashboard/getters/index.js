@@ -38,4 +38,8 @@ export default {
     GET_PLAYING_SONGS(state) {
         return state.playingSongs
     },
+
+    GET_SEARCHED(state) {
+        return state.searched
+    },
 }

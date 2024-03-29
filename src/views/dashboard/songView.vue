@@ -20,12 +20,13 @@ export default {
     },
     playSongs() {
       let data = {
-        title: this.song.name,
+        title: this.song.title,
         artist: this.song.artist.user.username,
         image: this.song.song_media[0].image,
         file: `${this.baseURL}${this.song.song_media[0].file}`
       }
       this.$store.commit('dashboard/UPDATE_PLAYING_SONGS', [data])
+      this.$router.go();
     }
   },
   mounted() {
@@ -40,17 +41,19 @@ export default {
 }
 </script>
 <template>
-  <div class="song d-flex flex-column gap-3">
-    <div class="d-flex gap-3">
+  <div class="song d-flex flex-column gap-3 p-2">
+    <div class="d-flex gap-3 single-header">
       <div>
         <img
-          class="img-fluid w-100"
-          src="../../assets/images/blank-profile.png"
+          class="img-fluid"
+          src="../../assets/images/player-bg.jpg"
           alt="cover image"
+          height="250"
+          width="150"
         />
       </div>
       <div class="d-flex flex-column">
-        <span class="song-title">{{ GET_SONG.name }}</span>
+        <span class="song-title">{{ GET_SONG.title }}</span>
         <span class="song-artist">{{ GET_SONG.artist.user.username }}</span>
       </div>
     </div>
@@ -71,7 +74,7 @@ export default {
           <tr>
             <th scope="row">{{ 1 }}</th>
             <td>
-              <span>{{ GET_SONG.name }} {{ GET_SONG.artist.user.username }}</span>
+              <span>{{ GET_SONG.title }} {{ GET_SONG.artist.user.username }}</span>
             </td>
             <td>10000</td>
             <td>{{ song.duration }}</td>

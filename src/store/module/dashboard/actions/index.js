@@ -116,4 +116,19 @@ export default {
             });
         })
     },
+
+    searchCatalog({commit}, payload) {
+        return new Promise((resolve, reject) =>  {
+            httpApi.get(baseURL + `/search?query=${payload}`).then(res => {
+                if (res.status === 200) {
+                    res.data['songs'] = processSongs(res.data['songs'])
+                    commit(types.UPDATE_SEARCHED, res.data);
+                    resolve(res);
+                }
+            })
+            .catch(err => {
+                reject(err);
+            });
+        })
+    }
 }

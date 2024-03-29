@@ -37,7 +37,7 @@ export default {
         return
       }
 
-      if (this.currentSong.paused){
+      if (this.currentSong.paused) {
         this.currentSong.pause()
       }
 
@@ -96,7 +96,6 @@ export default {
 
       let track = this.GET_PLAYING_SONGS[this.currentTrackNumber]
       this.track = { ...track }
-      console.log(this.track)
       if (this.currentSong) this.currentSong.pause()
       let audio = new Audio(track.file)
       audio.type = 'audio/mpeg'
@@ -118,7 +117,6 @@ export default {
         this.currentTrackNumber = 0
       } else this.currentTrackNumber += 1
 
-      console.log(this.GET_PLAYING_SONGS[this.currentTrackNumber])
       let track = this.GET_PLAYING_SONGS[this.currentTrackNumber]
       this.track = { ...track }
       if (this.currentSong) this.currentSong.pause()
@@ -149,8 +147,12 @@ export default {
 
 <template>
   <div class="player-card" v-if="GET_PLAYING_SONGS.length > 0">
-    <div class="song-info">
-      <img src="" alt="song cover" />
+    <div class="song-info mt-2">
+      <img
+        class="img-fluid"
+        src="../../assets/images/player-bg.jpg"
+        alt="song cover"
+      />
       <div class="d-flex flex-column" v-if="this.track">
         <span class="song-title">{{ this.track.title }}</span>
         <span class="song-artist">{{ this.track.artist }}</span>

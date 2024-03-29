@@ -37,5 +37,9 @@ export default {
 
     UPDATE_PLAYING_SONGS(state, payload) {
         state.playingSongs = payload
+    },
+
+    UPDATE_SEARCHED(state, payload) {
+        state.searched = payload
     }
 }

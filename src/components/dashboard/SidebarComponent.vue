@@ -2,13 +2,27 @@
 export default {
   name: 'SidebarComponent',
   data() {
-    return {}
+    return {
+      path: ''
+    }
   },
   methods: {
     logoutUser() {
-      this.$store.dispatch('auth/logout');
-      this.$router.push({name: "login"});
+      this.$store.dispatch('auth/logout')
+      this.$toast.open({
+        message: 'Logged out successfully.',
+        type: 'success',
+        duration: 3000,
+        position: 'top-right'
+      })
+      this.$router.push({ name: 'login' })
+    },
+    getPath() {
+      return this.$route.path
     }
+  },
+  mounted() {
+    this.path = this.getPath()
   }
 }
 </script>
@@ -31,12 +45,12 @@ export default {
         >
       </div>
     </div>
-    <div class="d-flex flex-column gap-3">
+    <!-- <div class="d-flex flex-column gap-3">
       <span class="text-grey">SAVED PLAYLISTS</span>
       <div class="d-flex flex-column gap-2">
         <router-link to="/">Happy</router-link>
       </div>
-    </div>
+    </div> -->
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">YOUR LIBRARY</span>
       <div class="d-flex flex-column gap-2">
@@ -67,8 +81,12 @@ export default {
         <router-link to="/account"
           ><span class="d-flex gap-2"><i class="bi bi-person"></i>Account</span></router-link
         >
-        
-        <a v-on:click="logoutUser"><span class="d-flex gap-2 text-light" ><i class="bi bi-box-arrow-left"></i>Logout</span></a>
+
+        <a v-on:click="logoutUser"
+          ><span class="d-flex gap-2 text-light"
+            ><i class="bi bi-box-arrow-left"></i>Logout</span
+          ></a
+        >
       </div>
     </div>
   </div>
