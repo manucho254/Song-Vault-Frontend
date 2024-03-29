@@ -1,4 +1,5 @@
 <script>
+import countries from '../../utils/countries'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -6,45 +7,55 @@ export default {
   data() {
     return {
       form_data: {
-        email: {
-          ref: 'email',
-          name: 'Email',
-          value: ''
-        },
-        username: {
-          ref: 'username',
-          name: 'Username',
-          value: ''
-        },
-        first_name: {
-          ref: 'first_name',
-          name: 'First Name',
-          value: ''
-        },
-        last_name: {
-          ref: 'last_name',
-          name: 'Last Name',
-          value: ''
-        },
-        country: {
-          ref: 'country',
-          name: 'Country',
-          value: ''
-        },
-        gender: {
-          ref: 'gender',
-          name: 'Gender',
-          value: ''
-        }
-      }
+        username: '',
+        email: '',
+        first_name: '',
+        last_name: '',
+        country: '',
+        gender: ''
+      },
+      image: {},
+      genders: ['Male', 'Female', 'Prefer Not To Say'],
+      countries: countries
     }
   },
-  mounted () {
-    console.log(this.GET_USER)
+  mounted() {
+    this.form_data = { ...this.GET_USER }
   },
   methods: {
     updateProfile() {
-      console.log(this.form_data)
+      this.$store
+        .dispatch('auth/updateProfile', this.form_data)
+        .then((res) => {
+          this.form_data = res.data
+          this.$toast.open({
+            message: 'Account updated successfully.',
+            type: 'success',
+            duration: 3000,
+            position: 'top-right'
+          })
+        })
+        .catch((err) => console.log(err))
+    },
+    getFile(e) {
+      const { files } = e.target
+      console.log(e.target)
+      this.form_data["user_media"] = [{"image": files}]
+      if (files && files[0]) {
+        if (this.image.src) {
+          URL.revokeObjectURL(this.image.src)
+        }
+        const blob = URL.createObjectURL(files[0])
+        const reader = new FileReader()
+
+        reader.onload = () => {
+          this.image = {
+            src: blob,
+            type: files[0].type
+          }
+        }
+        reader.readAsArrayBuffer(files[0])
+      }
     }
   },
   computed: {
@@ -61,18 +72,41 @@ export default {
     <form class="row" @submit.prevent="updateProfile">
       <div class="mb-3">
         <div class="d-flex align-items-end gap-2">
-          <img class="rounded img-fluid" />
-          <input type="file" />
+          <img :src="image.src" class="rounded img-fluid" />
+          <input type="file" @change="getFile" accept="image/jpeg, image/png" />
         </div>
       </div>
-      <div class="col-md-6 mb-3" v-for="(field, index) of form_data" :key="index">
-        <label>{{ field.name }}</label>
-        <input
-          :type="field.name === 'Email' ? 'email' : 'text'"
-          class="form-control"
-          v-model="field.value"
-          :placeholder="GET_USER[field.ref]"
-        />
+      <div class="col-md-6 mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" v-model="form_data.email" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Username</label>
+        <input type="text" class="form-control" v-model="form_data.username" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>First Name</label>
+        <input type="text" class="form-control" v-model="form_data.first_name" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Last Name</label>
+        <input type="text" class="form-control" v-model="form_data.last_name" required />
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>gender</label>
+        <select required class="form-select" v-model="form_data.gender" @change="getGender">
+          <option v-for="item in genders" :value="item" :key="item">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label>Country</label>
+        <select required class="form-select" v-model="form_data.country" @change="getCountry">
+          <option v-for="item in countries" :value="item.name" :key="item.code">
+            {{ item.name }}
+          </option>
+        </select>
       </div>
       <button type="submit" class="btn btn-primary">Update</button>
     </form>

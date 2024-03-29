@@ -34,10 +34,12 @@ export default {
         />
         <div class="d-flex gap-3">
           <span class="notifications h3 text-white"><i class="fa-regular fa-bell"></i></span>
-          <span class="profile h3 text-white" v-if="!image"
-            ><i class="fa-solid fa-circle"></i
-          ></span>
-          <img v-else :src="image" alt="profile image" />
+          <router-link to="/account">
+            <span class="profile h3 text-white" v-if="!image"
+              ><i class="fa-solid fa-circle"></i
+            ></span>
+            <img v-else :src="image" alt="profile image"
+          /></router-link>
         </div>
       </div>
       <CatalogComponent v-if="getPathName() === '/'" />

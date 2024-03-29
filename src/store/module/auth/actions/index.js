@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import { httpAuth } from '@/services/api.service'
+import { httpAuth, httpApi } from '@/services/api.service'
 import { destroyTokens } from '@/services/jwt.service'
 import types from '../types/index'
 
@@ -69,9 +69,24 @@ export default {
             });
         })
     },
+
     logout({commit}) {
         commit(types.UPDATE_AUTH_TOKENS, { access_token: "", refresh: "" });
         commit(types.UPDATE_USER, JSON.stringify({}));
         destroyTokens()
     },
+
+    updateProfile({commit}, payload) {
+        return new Promise((resolve, reject) =>  {
+            httpApi.put(baseURL + `/profile/${payload.id}/`, payload).then(res => {
+                if (res.status === 200) {
+                    commit(types.UPDATE_USER, res.data);
+                    resolve(res);
+                }
+            })
+            .catch(err => {
+                reject(err);
+            });
+        })
+    }
 }

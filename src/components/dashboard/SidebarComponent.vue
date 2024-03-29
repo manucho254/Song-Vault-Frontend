@@ -75,11 +75,8 @@ export default {
     <div class="d-flex flex-column gap-3">
       <span class="text-grey">GENERAL</span>
       <div class="d-flex flex-column gap-2">
-        <router-link to="/settings"
-          ><span class="d-flex gap-2"><i class="bi bi-gear"></i>Settings</span></router-link
-        >
         <router-link to="/account"
-          ><span class="d-flex gap-2"><i class="bi bi-person"></i>Account</span></router-link
+          ><span class="d-flex gap-2"><i class="bi bi-gear"></i>account</span></router-link
         >
 
         <a v-on:click="logoutUser"
