@@ -43,8 +43,6 @@ export default {
     },
     getFile(e) {
       const { files } = e.target
-      console.log(e.target)
-      this.form_data['user_media'] = [{ image: files }]
       if (files && files[0]) {
         if (this.image.src) {
           URL.revokeObjectURL(this.image.src)
@@ -58,6 +56,11 @@ export default {
             type: files[0].type
           }
         }
+        const file = new File([blob], "new_file", { type: 'image/png' })
+        const formData = new FormData()
+        formData.append('file', file)
+        this.form_data["files"] = formData
+        console.log(formData)
         reader.readAsArrayBuffer(files[0])
       }
     }

@@ -33,7 +33,7 @@ export default {
           src="../assets/images/concert-image.jpg"
         />
         <div class="d-flex gap-3">
-          <span class="notifications h3 text-white"><i class="fa-regular fa-bell"></i></span>
+          <span class="notifications h3 text-white mt-1"><i class="fa-regular fa-bell"></i></span>
           <router-link to="/account">
             <span class="profile h3 text-white" v-if="!image"
               ><i class="fa-solid fa-circle"></i

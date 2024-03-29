@@ -27,7 +27,7 @@ export default {
     <div class="bg-light auth-form">
       <div class="bg-light d-flex flex-column gap-3">
         <div>
-          <h3 class="fw-bold">Choose Account Type</h3>
+          <h3 class="fw-bold text-dark">Choose Account Type</h3>
         </div>
         <div class="d-flex gap-3">
           <div

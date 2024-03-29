@@ -51,6 +51,7 @@ export default {
     },
     pauseSong() {
       /** Pause song */
+      this.progress = Math.floor(this.currentSong.currentTime)
       this.playing = false
       this.currentSong.pause()
     },
@@ -62,6 +63,7 @@ export default {
     updateVolume() {
       /** Update song volume */
       if (!this.currentSong) return
+      this.progress = Math.floor(this.currentSong.currentTime)
       this.currentSong.volume = (this.volume / 100).toFixed(1)
       this.currentSong.play()
     },
@@ -70,13 +72,14 @@ export default {
       if (!this.currentSong) return
       let seconds = 0
       let el = document.querySelector('.song-progress')
-      el.max = Number(duration)
+      el.max = Math.floor(duration)
       const intervalID = setInterval(updateProgress, 1000)
 
       function updateProgress() {
         seconds += 1
         if (seconds >= duration) {
           clearInterval(intervalID)
+          this.playing = false
           return
         }
         if (song.paused) {
@@ -131,6 +134,9 @@ export default {
         func(audio.duration, audio)
       }
       this.currentSong.play()
+    },
+    getPath() {
+      return this.$route.path
     }
   },
   mounted() {
@@ -147,13 +153,9 @@ export default {
 </script>
 
 <template>
-  <div class="player-card" v-if="GET_PLAYING_SONGS.length > 0">
-    <div class="song-info mt-2">
-      <img
-        class="img-fluid"
-        src="../../assets/images/player-bg.jpg"
-        alt="song cover"
-      />
+  <div class="player-card" v-if="GET_PLAYING_SONGS.length > 0 && getPath() !== '/account'">
+    <div class="song-info">
+      <img class="img-fluid" src="../../assets/images/player-bg.jpg" alt="song cover" />
       <div class="d-flex flex-column" v-if="this.track">
         <span class="song-title">{{ this.track.title }}</span>
         <span class="song-artist">{{ this.track.artist }}</span>
