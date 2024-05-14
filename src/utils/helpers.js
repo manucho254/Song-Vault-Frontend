@@ -1,3 +1,6 @@
+import store from '@/store';
+import { getRefreshToken } from "@/services/jwt.service"
+
 
 function fetchDuration(path) {
     return new Promise((resolve) => {
@@ -29,4 +32,14 @@ function processSongs (songs){
     return songs
 }
 
-export default (fetchDuration, formatDuration, processSongs)
+function refreshAuthTokens() {
+  const duration = 10700000;
+  let count = 1
+  const intervalId = setInterval(() => {
+    store.dispatch("auth/refreshToken", {"refresh": getRefreshToken()});
+    if (count == 3) clearInterval(intervalId);
+    count++;
+  }, duration)
+}
+
+export default (fetchDuration, formatDuration, processSongs, refreshAuthTokens)

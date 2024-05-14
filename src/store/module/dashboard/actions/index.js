@@ -160,4 +160,12 @@ export default {
         })
     },
 
+    getStatus({commit}) {
+        return new Promise((resolve, reject) => {
+            httpApi.get(baseURL + "/status/").then((res) => {
+                resolve(res);
+            }).catch((err) => {reject(err)})
+        })
+    }
+
 }

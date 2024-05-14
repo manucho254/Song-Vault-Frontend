@@ -41,17 +41,25 @@ export default {
       v-model="query"
     />
   </div>
-  <div class="albums" v-if="GET_SEARCHED.albums.length > 0">
-    <h3 class="text-light">Albums</h3>
-    <albumsComponentVue :albums="GET_SEARCHED.albums" />
-  </div>
-  <div class="songs" v-if="GET_SEARCHED.songs.length > 0">
-    <h3 class="text-light">Singles</h3>
-    <songsComponentVue :songs="GET_SEARCHED.songs" />
-  </div>
-  <div class="artists" v-if="GET_SEARCHED.artists.length > 0">
-    <h3 class="text-light">Artists</h3>
-    <artistsComponentVue :artists="GET_SEARCHED.artists" />
+  <div
+    v-if="
+      GET_SEARCHED.albums.length > 0 ||
+      GET_SEARCHED.songs.length > 0 ||
+      GET_SEARCHED.artists.length > 0
+    "
+  >
+    <div class="albums" v-if="GET_SEARCHED.albums.length > 0">
+      <h3 class="text-light">Albums</h3>
+      <albumsComponentVue :albums="GET_SEARCHED.albums" />
+    </div>
+    <div class="songs" v-if="GET_SEARCHED.songs.length > 0">
+      <h3 class="text-light">Singles</h3>
+      <songsComponentVue :songs="GET_SEARCHED.songs" />
+    </div>
+    <div class="artists" v-if="GET_SEARCHED.artists.length > 0">
+      <h3 class="text-light">Artists</h3>
+      <artistsComponentVue :artists="GET_SEARCHED.artists" />
+    </div>
   </div>
   <div v-else>
     <h4 class="d-flex gap-2">

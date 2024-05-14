@@ -9,8 +9,10 @@ const router = createRouter({
   routes
 })
 
+/** auth tokens */
+let tokens = store.getters["auth/GET_AUTH_TOKENS"]
+/** check if route is authenticated */
 function is_authenticated() {
-  let tokens = store.getters["auth/GET_AUTH_TOKENS"]
   return tokens.access_token !== '' && tokens.refresh !== ''
 }
 

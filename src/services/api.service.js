@@ -58,14 +58,14 @@ httpApi.interceptors.response.use(
         return response;
     },
     function (error) {
-        console.log(error)
+        const error_msg = `Error ${error.response.status}!`;
         if (error.response.status == 401) {
             router.push({name: 'login'})
         }
         else {
             return Promise.reject({
                 "status": error.response.status,
-                "message": error.response.message
+                "message": error.response.message ? error.response.message:error_msg
             });
         }
     }
